@@ -31,9 +31,20 @@ body{
     background-image: url('https://cdn.discordapp.com/attachments/766537168713547776/1110648631104634992/loading_cats.gif');
     background-size: cover;
     background-position: center;
+    border: 0px solid black;
+    transition: border-bottom-width .2s ease-in, transform .2s ease-in, background .05s, box-shadow .2s ease-in;
 }
 
 .addbutton:hover{
+    border-bottom-width: 2px;
+    transform: translate(0px, -5px);
+    box-shadow: 0px 11.5px 11.5px hsl(0deg 0% 0% / 0.32);
+}
+
+.addbutton:active{
+    transition: transform .05s ease-in;
+    transform: translate(0);
+    box-shadow: 0px 0px 0px transparent;
 }
 
 #preloader{

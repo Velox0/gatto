@@ -41,7 +41,7 @@ function buttonbg() {
 }
 
 function getimage() {
-
+    buttonbg();
     fetch(url, {
         headers: {
             'x-api-key': API_KEY
@@ -53,6 +53,6 @@ function getimage() {
         .then((data) => {
             console.log(data);
             currentImageToVoteOn = data[0];
-            document.getElementById("catbox").innerHTML += '<img id="cat" class="gatto" alt="gatto" src="' + currentImageToVoteOn.url + '"/>'
+            document.getElementById("catbox").innerHTML += '<img id="cat" width="100px" class="gatto" alt="gatto" src="' + currentImageToVoteOn.url + '"/>'
         });
 }
