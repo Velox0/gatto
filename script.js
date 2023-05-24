@@ -14,10 +14,10 @@ fetch(url2, {
         return response.json();
     })
     .then((data) => {
-        console.log(data)
+        // console.log(data);
         for (i = 0; i < data.length; i++) {
             prefetchdata.push(data[i].url);
-            document.getElementById('preloader').innerHTML += '<img src="' + data[i].url + '"/>';
+            document.getElementById('preloader').innerHTML += '<img min-width="100px" min-height="100px" width="100px" src="' + data[i].url + '"/>';
         }
     });
 
@@ -36,7 +36,7 @@ function buttonbg() {
         mybutton.style.backgroundSize = "cover";
         mybutton.style.backgroundPosition = "center";
         i = (i + 1) % 10;
-        console.log(bgi);
+        // console.log(bgi);
     }
 }
 
@@ -51,8 +51,8 @@ function getimage() {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             currentImageToVoteOn = data[0];
-            document.getElementById("catbox").innerHTML += '<img id="cat" width="100px" class="gatto" alt="gatto" src="' + currentImageToVoteOn.url + '"/>'
+            document.getElementById("catbox").innerHTML += '<img id="cat" class="gatto" alt="gatto" src="' + currentImageToVoteOn.url + '"/>'
         });
 }

@@ -2,13 +2,28 @@ body{
     margin: 0;
 }
 
+.aboutme{
+    width: 100%;
+}
+
+.cathouse{
+    position: relative;
+    width: 100%;
+    background-color: rgb(228, 228, 228);
+    height: 500px;
+    overflow: hidden;
+}
+
 .gatto{
-    width: max(calc(50% - 10px), 300px);
+    width: min(calc(25% - 10px), 200px);
     transition: 0.2s ease-out;
     padding: 5px;
-    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
-    background-size: 5px 5px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .gatto:hover{
@@ -18,7 +33,7 @@ body{
 
 .addbutton{
     z-index: 2;
-    position: fixed;
+    position: absolute;
     height: 100px;
     width: 100px;
     top: calc(50% - 50px);
