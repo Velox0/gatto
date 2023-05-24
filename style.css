@@ -15,16 +15,17 @@ body{
 }
 
 #catbox{
-    max-width: 700px;
+    max-width: 1000px;
     height: 500px;
     background-color: hsl(0, 0%, 89%);
     margin: auto;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .gatto{
     border: 5px solid hsl(0, 0%, 100%);
-    width: min(calc(25% - 10px), 200px);
+    width: min(calc(25% - 10px), 240px);
     transition: 0.2s ease-out;
     -webkit-user-drag: none;
     user-drag: none;
@@ -81,6 +82,34 @@ body{
 }
 
 .contrastingtext{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
+    background: hsla(0, 0%, 100%, 0.226);
+    color: black;
+    height: 100px;
+}t{
     background: hsla(0, 0%, 100%, 0.226);
     color: black;
     height: 100px;
