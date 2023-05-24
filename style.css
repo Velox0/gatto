@@ -9,21 +9,30 @@ body{
 .cathouse{
     position: relative;
     width: 100%;
-    background-color: rgb(228, 228, 228);
     height: 500px;
     overflow: hidden;
+    background-color: pink;
+}
+
+#catbox{
+    max-width: 700px;
+    height: 500px;
+    background-color: hsl(0, 0%, 89%);
+    margin: auto;
+    padding: 10px;
 }
 
 .gatto{
+    border: 5px solid hsl(0, 0%, 100%);
     width: min(calc(25% - 10px), 200px);
     transition: 0.2s ease-out;
-    padding: 5px;
-    user-drag: none;
     -webkit-user-drag: none;
-    user-select: none;
+    user-drag: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    user-select: none;
+    border-radius: 5px;
 }
 
 .gatto:hover{
