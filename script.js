@@ -52,7 +52,7 @@ function getimage() {
         })
         .then((data) => {
             // console.log(data);
-            currentImageToVoteOn = data[0];
-            document.getElementById("catbox").innerHTML += '<img id="cat" class="gatto" alt="gatto" src="' + currentImageToVoteOn.url + '"/>'
+            newgatto = data[0];
+            document.getElementById("catbox").innerHTML += '<img id="cat" class="gatto" alt="gatto" src="' + newgatto.url + '"/>'
         });
 }
