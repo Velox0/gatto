@@ -1,0 +1,43 @@
+/* https://coolors.co/palette/020305-342d30-aa766e-ffffff-ffc738 
+d-d-m-l-l*/
+
+h1{
+    font-family: fredoka;
+    font-weight:500;
+}
+
+.gradient-text{
+    background-size: 200%;
+    background-position: 0% 0%;
+    background-image: linear-gradient(to bottom right, deeppink, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: .5s;
+}
+
+.gradient-text:hover{
+    background-position: 100% 100%;
+}
+
+body{
+    background-color:  #020305;
+    color: #fff;
+}
+
+.addbutton{
+    border-color: #ffc738;
+}
+
+#catbox{
+    background-color: #342d30;
+}
+
+.cathouse{
+    background-color: transparent;
+}
+
+.gattospace{
+    padding: 0;
+    border: 0;
+}
