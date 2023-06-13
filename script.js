@@ -3,9 +3,10 @@ const API_KEY = "live_aEzS71mWErDPX7WUMh46dXQbNqfKbghLM4t3gFVyVM4ehXGIzWDVNe0r4s
 const url = `${API_URL}images/search`;
 
 numberofcats = 0;
+const prefetchcats = 10;
 
 const prefetchdata = [];
-url2 = url + "?limit=10";
+url2 = url + "?limit=" + prefetchcats;
 
 fetch(url2, {
     headers: {
