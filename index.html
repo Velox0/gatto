@@ -4,22 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- favicon.ico -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&display=swap"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="theme2.css" />
+
+    <!-- JS -->
     <script src="script.js"></script>
     <title>UWU</title>
   </head>
-
-  <div
-    class="addbutton"
-    id="loadbutton"
-    value="load"
-    onclick="getimage()"
-  ></div>
+  <div class="aboutme">
+    <h1><span class="gradient-text">XYZ</span></h1>
+  </div>
+  <div class="cathouse">
+    <div class="addbutton" id="loadbutton" onclick="getimage()"></div>
+    <div id="catbox">
+      <!-- CATS LIVE HERE!!! -->
+    </div>
+  </div>
   <div id="preloader"></div>
-  <div id="catbox"></div>
   <body></body>
 </html>

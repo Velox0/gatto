@@ -1,63 +1,102 @@
-body{
-    margin: 0;
+* {
+  box-sizing: border-box;
 }
 
-.gatto{
-    width: max(calc(50% - 10px), 300px);
-    transition: 0.2s ease-out;
-    padding: 5px;
-    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
-    background-size: 5px 5px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+body {
+  margin: 0;
 }
 
-.gatto:hover{
-    transform: translate(-2px, -5px);
-    box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.432);
+.aboutme {
+  width: 100%;
 }
 
-.addbutton{
-    z-index: 2;
-    position: fixed;
-    height: 100px;
-    width: 100px;
-    top: calc(50% - 50px);
-    left: calc(50% - 50px);
-    text-align: center;
-    font-size: 100px;
-    line-height: 100px;
-    overflow: hidden;
-    border-radius: 20px;
-    background-image: url('https://cdn.discordapp.com/attachments/766537168713547776/1110648631104634992/loading_cats.gif');
-    background-size: cover;
-    background-position: center;
-    border: 0px solid black;
-    transition: border-bottom-width .2s ease-in, transform .2s ease-in, background .05s, box-shadow .2s ease-in;
+.addbutton {
+  z-index: 2;
+  position: absolute;
+  height: max(100px, 10vh);
+  width: max(100px, 10vh);
+  top: calc(30% - max(100px, 10vh) / 2);
+  left: calc(50% - max(100px, 10vh) / 2);
+  text-align: center;
+  font-size: 100px;
+  line-height: 100px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-image: url("https://cdn.discordapp.com/attachments/766537168713547776/1110648631104634992/loading_cats.gif");
+  background-size: cover;
+  background-position: center;
+  border: 0px solid white;
+  transition: border-bottom-width 0.2s ease-in, transform 0.2s ease-in, background 0.05s, box-shadow 0.2s ease-in;
+}
+.addbutton:hover {
+  border-bottom-width: 2px;
+  transform: translate(0px, -5px);
+  box-shadow: 0px 11.5px 11.5px hsla(0, 0%, 0%, 0.32);
+}
+.addbutton:active {
+  transition: transform 0.05s ease-in;
+  transform: translate(0);
+  box-shadow: 0px 0px 0px transparent;
 }
 
-.addbutton:hover{
-    border-bottom-width: 2px;
-    transform: translate(0px, -5px);
-    box-shadow: 0px 11.5px 11.5px hsl(0deg 0% 0% / 0.32);
+.addbuttonborder {
+  z-index: 0;
+  background: blue;
+  background-clip: padding-box;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  padding: 10px;
 }
 
-.addbutton:active{
-    transition: transform .05s ease-in;
-    transform: translate(0);
-    box-shadow: 0px 0px 0px transparent;
+.cathouse {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  background-color: pink;
 }
 
-#preloader{
-    position: fixed;
-    height: 0px;
-    width: 0px;
-    bottom: 0;
-    right: 0;
-    overflow: hidden;
+#catbox {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background-color: hsl(0, 0%, 89%);
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.contrastingtext{
-    background: hsla(0, 0%, 100%, 0.226);
-    color: black;
-    height: 100px;
+.gattospace {
+  position: absolute;
+  width: min(25%, 240px);
 }
+
+.gatto {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  position: relative;
+  transition: 0.2s ease-out;
+  -webkit-user-drag: none;
+  user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border-radius: 5px;
+}
+.gatto:hover {
+  transform: scale(1.1);
+  box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.432);
+}
+.gatto:active {
+  transform: scale(0.9);
+}
+
+#preloader {
+  position: fixed;
+  height: 0px;
+  width: 0px;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}/*# sourceMappingURL=style.css.map */
