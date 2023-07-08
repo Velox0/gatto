@@ -139,6 +139,7 @@ var newX = 0;
 var newY = 0;
 
 function trackcat(e) {
+    this.style.transition = '0s';
     trackfromX = e.clientX;
     trackfromY = e.clientY;
     tracking = this;
@@ -151,12 +152,7 @@ function moveitmoveit(e) {
     deltaX = e.clientX - trackfromX;
     deltaY = e.clientY - trackfromY;
     newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
-    newX = Math.min(newX, maxX);
-    newX = Math.max(newX, minX);
-
     newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
-    newY = Math.min(newY, maxY);
-    newY = Math.max(newY, minY);
 
     this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
 
@@ -170,11 +166,30 @@ function moveitmoveit(e) {
 
 }
 
-function donttrackcat() {
+function donttrackcat(e) {
+    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
+    newX = Math.min(newX, maxX);
+    newX = Math.max(newX, minX);
+
+    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
+    newY = Math.min(newY, maxY);
+    newY = Math.max(newY, minY);
+
+    this.style.transition = '.2s ease-out';
+    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+
     tracking.removeEventListener("mousemove", moveitmoveit);
     this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
     this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
     this.style.zIndex = 1;
+
+    tracking = null;
+    trackfromX = 0;
+    trackfromY = 0;
+    deltaX = 0;
+    deltaY = 0;
+    newX = 0;
+    newY = 0;
 }
 
 function limiter() {
