@@ -14,6 +14,8 @@ var minX = 10;
 var minY = 10;
 var maxY;
 
+// CAT API
+
 function preload() {
     fetch(url2, {
         headers: {
@@ -42,49 +44,6 @@ function preload() {
         });
 }
 
-var i = 0;
-
-window.onload = function () {
-    document.getElementById("loadbutton").addEventListener("mouseenter", buttonbg);
-    preload();
-    setLimit();
-}
-
-function setLimit() {
-    maxX = parseInt(document.getElementById('catbox').getBoundingClientRect().width) - 270;
-    maxY = parseInt(document.getElementById('catbox').getBoundingClientRect().height) - 250;
-}
-
-function resetposition() {
-    for (tempnum = 0; tempnum < numberofcats; tempnum++) {
-        boxwidth = document.getElementById('catbox').getBoundingClientRect().width;
-        boxheight = document.getElementById('catbox').getBoundingClientRect().height;
-        currentx = document.getElementsByClassName('gattospace')[tempnum].dataset.x;
-        currenty = document.getElementsByClassName('gattospace')[tempnum].dataset.y;
-        document.getElementsByClassName('gattospace')[tempnum].style.transform = "translate("
-            + Math.min((boxwidth * currentx), maxX) + "px, "
-            + Math.min((boxheight * currenty), maxY) + "px)";
-    }
-}
-
-window.onresize = function () {
-    setLimit();
-    resetposition();
-    // customlog(maxX + ',' + maxY)
-}
-
-function buttonbg() {
-    if (prefetchdata.length > 0) {
-        bgi = "url('" + prefetchdata[i % 10] + "')"
-        const mybutton = document.getElementById("loadbutton");
-        mybutton.style.backgroundImage = bgi;
-        mybutton.style.backgroundSize = "cover";
-        mybutton.style.backgroundPosition = "center";
-        i = (i + 1) % 10;
-        // customlog(bgi);
-    }
-}
-
 function getimage() {
     buttonbg();
     fetch(url, {
@@ -109,6 +68,53 @@ function getimage() {
         .catch(err => console.log('oppsie!\nan image didnt load'));
 }
 
+window.onload = function () {
+    document.getElementById("loadbutton").addEventListener("mouseenter", buttonbg);
+    preload();
+    setLimit();
+}
+
+// RESPONSIVE JS
+
+window.onresize = function () {
+    setLimit();
+    resetposition();
+    // customlog(maxX + ',' + maxY)
+}
+
+function setLimit() {
+    maxX = parseInt(document.getElementById('catbox').getBoundingClientRect().width) - 270;
+    maxY = parseInt(document.getElementById('catbox').getBoundingClientRect().height) - 250;
+}
+
+function resetposition() {
+    for (tempnum = 0; tempnum < numberofcats; tempnum++) {
+        boxwidth = document.getElementById('catbox').getBoundingClientRect().width;
+        boxheight = document.getElementById('catbox').getBoundingClientRect().height;
+        currentx = document.getElementsByClassName('gattospace')[tempnum].dataset.x;
+        currenty = document.getElementsByClassName('gattospace')[tempnum].dataset.y;
+        document.getElementsByClassName('gattospace')[tempnum].style.transform = "translate("
+            + Math.min((boxwidth * currentx), maxX) + "px, "
+            + Math.min((boxheight * currenty), maxY) + "px)";
+    }
+}
+
+// BUTTON BACKGROUND CYCLE
+
+var backgroundIndex = 0;
+
+function buttonbg() {
+    if (prefetchdata.length > 0) {
+        bgi = "url('" + prefetchdata[backgroundIndex % 10] + "')"
+        const mybutton = document.getElementById("loadbutton");
+        mybutton.style.backgroundImage = bgi;
+        mybutton.style.backgroundSize = "cover";
+        mybutton.style.backgroundPosition = "center";
+        backgroundIndex = (backgroundIndex + 1) % 10;
+        // customlog(bgi);
+    }
+}
+
 function initializecat() {
     gattospace = document.getElementsByClassName("gattospace")[numberofcats];
 
@@ -130,7 +136,8 @@ function initializecat() {
     }
 }
 
-var tracking;
+// INTERACTION
+
 var trackfromX = 0;
 var trackfromY = 0;
 var deltaX = 0;
@@ -142,7 +149,6 @@ function trackcat(e) {
     this.style.transition = '0s';
     trackfromX = e.clientX;
     trackfromY = e.clientY;
-    tracking = this;
     this.style.zIndex = 3;
 
     this.addEventListener("mousemove", moveitmoveit);
@@ -178,19 +184,18 @@ function donttrackcat(e) {
     this.style.transition = '.2s ease-out';
     this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
 
-    tracking.removeEventListener("mousemove", moveitmoveit);
+    this.removeEventListener("mousemove", moveitmoveit);
     this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
     this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
     this.style.zIndex = 1;
 
-    tracking = null;
-    trackfromX = 0;
-    trackfromY = 0;
     deltaX = 0;
     deltaY = 0;
     newX = 0;
     newY = 0;
 }
+
+// MISC
 
 function limiter() {
     getimage = function () { };
