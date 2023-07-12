@@ -2,11 +2,13 @@
   box-sizing: border-box;
 }
 
-.envelope {
-  overflow-x: hidden;
+.envelop {
+  overflow-y: visible;
+  min-height: 100vh;
 }
 
 body {
+  min-height: 100vh;
   overflow-x: hidden;
   margin: 0;
   max-width: 1000px;
@@ -113,4 +115,12 @@ body {
 .padded {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .envelope {
+    overflow-y: visible;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 }/*# sourceMappingURL=style.css.map */
