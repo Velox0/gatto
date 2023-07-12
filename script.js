@@ -193,7 +193,7 @@ function donttrackcat(e) {
 // MOBILE VERSION
 
 function ttrackcat(e) {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
     this.style.transition = '0s';
     trackfromX = e.touches[0].clientX;
     trackfromY = e.touches[0].clientY;
@@ -212,7 +212,7 @@ function tmoveitmoveit(e) {
 }
 
 function tdonttrackcat(e) {
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflowY = 'visible';
     newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
     newX = Math.min(newX, maxX);
     newX = Math.max(newX, minX);
