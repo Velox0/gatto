@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+.envelope {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   max-width: 1000px;
@@ -11,10 +15,10 @@ body {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.aboutme {
+.header {
   width: 100%;
 }
 
@@ -103,4 +107,9 @@ body {
   bottom: 0;
   right: 0;
   overflow: hidden;
+}
+
+.padded {
+  padding-left: 25px;
+  padding-right: 25px;
 }/*# sourceMappingURL=style.css.map */
