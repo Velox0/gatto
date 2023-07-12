@@ -45,7 +45,6 @@ function preload() {
 }
 
 function getimage() {
-    buttonbg();
     fetch(url, {
         headers: {
             'x-api-key': API_KEY
@@ -70,6 +69,7 @@ function getimage() {
 
 window.onload = function () {
     document.getElementById("loadbutton").addEventListener("mouseenter", buttonbg);
+    document.getElementById("loadbutton").addEventListener("touchstart", buttonbg);
     preload();
     setLimit();
 }
@@ -78,7 +78,7 @@ window.onload = function () {
 
 window.onresize = function () {
     setLimit();
-    resetposition();
+    reposition();
     // customlog(maxX + ',' + maxY)
 }
 
@@ -87,7 +87,7 @@ function setLimit() {
     maxY = parseInt(document.getElementById('catbox').getBoundingClientRect().height) - 250;
 }
 
-function resetposition() {
+function reposition() {
     for (tempnum = 0; tempnum < numberofcats; tempnum++) {
         boxwidth = document.getElementById('catbox').getBoundingClientRect().width;
         boxheight = document.getElementById('catbox').getBoundingClientRect().height;
@@ -133,6 +133,9 @@ function initializecat() {
         document.getElementsByClassName("gattospace")[index].addEventListener('mousedown', trackcat);
         document.getElementsByClassName("gattospace")[index].addEventListener('mouseup', donttrackcat);
         document.getElementsByClassName("gattospace")[index].addEventListener('mouseout', donttrackcat);
+
+        document.getElementsByClassName("gattospace")[index].addEventListener('touchstart', ttrackcat);
+        document.getElementsByClassName("gattospace")[index].addEventListener('touchend', tdonttrackcat);
     }
 }
 
@@ -155,21 +158,12 @@ function trackcat(e) {
 }
 
 function moveitmoveit(e) {
-    deltaX = e.clientX - trackfromX;
-    deltaY = e.clientY - trackfromY;
+    deltaX = (e.clientX) - trackfromX;
+    deltaY = (e.clientY) - trackfromY;
     newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
     newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
 
     this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
-
-    // customlog(
-    //     this.dataset.x + ', ' + this.dataset.y + ', ' +
-    //     document.getElementById('catbox').getBoundingClientRect().width + ', ' + document.getElementById('catbox').getBoundingClientRect().height + ', ' +
-    //     deltaX + ', ' + deltaY + ', '
-    //     +
-    //     newX + ", " + newY
-    // );
-
 }
 
 function donttrackcat(e) {
@@ -185,6 +179,52 @@ function donttrackcat(e) {
     this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
 
     this.removeEventListener("mousemove", moveitmoveit);
+
+    this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
+    this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
+    this.style.zIndex = 1;
+
+    deltaX = 0;
+    deltaY = 0;
+    newX = 0;
+    newY = 0;
+}
+
+// MOBILE VERSION
+
+function ttrackcat(e) {
+    document.body.style.overflow = 'hidden';
+    this.style.transition = '0s';
+    trackfromX = e.touches[0].clientX;
+    trackfromY = e.touches[0].clientY;
+    this.style.zIndex = 3;
+
+    this.addEventListener("touchmove", tmoveitmoveit);
+}
+
+function tmoveitmoveit(e) {
+    deltaX = (e.touches[0].clientX) - trackfromX;
+    deltaY = (e.touches[0].clientY) - trackfromY;
+    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
+    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
+
+    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+}
+
+function tdonttrackcat(e) {
+    document.body.style.overflow = 'scroll';
+    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
+    newX = Math.min(newX, maxX);
+    newX = Math.max(newX, minX);
+
+    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
+    newY = Math.min(newY, maxY);
+    newY = Math.max(newY, minY);
+
+    this.style.transition = '.2s ease-out';
+    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+
+    this.removeEventListener("touchmove", tmoveitmoveit);
     this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
     this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
     this.style.zIndex = 1;
