@@ -118,16 +118,16 @@ function buttonbg() {
 function initializecat() {
     gattospace = document.getElementsByClassName("gattospace")[numberofcats];
 
-    randomX = Math.random() * .6 + .1;
-    randomY = Math.random() * .6 + .1;
+    randomX = Math.random() * (maxX - minX) + minX;
+    randomY = Math.random() * (maxY - minY) + minY;
 
-    actualX = document.getElementById('catbox').getBoundingClientRect().width * (randomX);
-    actualY = document.getElementById('catbox').getBoundingClientRect().height * (randomY);
+    relativeX = randomX / document.getElementById('catbox').getBoundingClientRect().width;
+    relativeY = randomY / document.getElementById('catbox').getBoundingClientRect().height;
 
-    gattospace.style.transform = "translate(" + actualX + "px, " + actualY + "px)";
+    gattospace.style.transform = "translate(" + randomX + "px, " + randomY + "px)";
 
-    gattospace.dataset.x = randomX;
-    gattospace.dataset.y = randomY;
+    gattospace.dataset.x = relativeX;
+    gattospace.dataset.y = relativeY;
 
     for (index = 0; index <= numberofcats; index++) {
         document.getElementsByClassName("gattospace")[index].addEventListener('mousedown', trackcat);
@@ -193,6 +193,7 @@ function donttrackcat(e) {
 // MOBILE VERSION
 
 function ttrackcat(e) {
+    document.getElementById('envelope').style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
     this.style.transition = '0s';
     trackfromX = e.touches[0].clientX;
@@ -212,6 +213,7 @@ function tmoveitmoveit(e) {
 }
 
 function tdonttrackcat(e) {
+    document.getElementById('envelope').style.overflowY = 'visible';
     document.body.style.overflowY = 'visible';
     newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
     newX = Math.min(newX, maxX);
