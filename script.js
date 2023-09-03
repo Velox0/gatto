@@ -1,5 +1,6 @@
 const API_URL = `https://api.thecatapi.com/v1/`;
-const API_KEY = "live_aEzS71mWErDPX7WUMh46dXQbNqfKbghLM4t3gFVyVM4ehXGIzWDVNe0r4sKgyJmM";
+const API_KEY =
+  "live_aEzS71mWErDPX7WUMh46dXQbNqfKbghLM4t3gFVyVM4ehXGIzWDVNe0r4sKgyJmM";
 const url = `${API_URL}images/search`;
 
 numberofcats = 0;
@@ -17,86 +18,101 @@ var maxY;
 // CAT API
 
 function preload() {
-    fetch(url2, {
-        headers: {
-            'x-api-key': API_KEY
-        }
+  fetch(url2, {
+    headers: {
+      "x-api-key": API_KEY,
+    },
+  })
+    .then((response) => {
+      return response.json();
     })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            // customlog(data);
-            for (i = 0; i < data.length; i++) {
-                prefetchdata.push(data[i].url);
-                document.getElementById('preloader').innerHTML += '<img min-width="100px" min-height="100px" width="100px" src="' + data[i].url + '"/>';
-            }
-        })
-        .catch(err => {
-            console.log('oppsie!');
-            if (re < 5) {
-                setTimeout(preload, 1000);
-                re++;
-            }
-            else {
-                console.log('You seem to be offline');
-            }
-        });
+    .then((data) => {
+      // customlog(data);
+      for (i = 0; i < data.length; i++) {
+        prefetchdata.push(data[i].url);
+        document.getElementById("preloader").innerHTML +=
+          '<img min-width="100px" min-height="100px" width="100px" src="' +
+          data[i].url +
+          '"/>';
+      }
+    })
+    .catch((err) => {
+      console.log("oppsie!");
+      if (re < 5) {
+        setTimeout(preload, 1000);
+        re++;
+      } else {
+        console.log("You seem to be offline");
+      }
+    });
 }
 
 function getimage() {
-    fetch(url, {
-        headers: {
-            'x-api-key': API_KEY
-        }
+  fetch(url, {
+    headers: {
+      "x-api-key": API_KEY,
+    },
+  })
+    .then((response) => {
+      return response.json();
     })
-        .then((response) => {
-            return response.json();
-        })
-        .then((newgatto) => {
-            // customlog(data);
-            newgatto = newgatto[0].url;
-            document.getElementById("catbox").innerHTML
-                += '<div class="gattospace">'
-                + '<img draggable="false" (dragstart)="false;" class="gatto" alt="gatto" src="'
-                + newgatto
-                + '"/></div>';
-            initializecat(numberofcats);
-            numberofcats++;
-        })
-        .catch(err => console.log('oppsie!\nan image didnt load'));
+    .then((newgatto) => {
+      // customlog(data);
+      newgatto = newgatto[0].url;
+      document.getElementById("catbox").innerHTML +=
+        '<div class="gattospace">' +
+        '<img draggable="false" (dragstart)="false;" class="gatto" alt="gatto" src="' +
+        newgatto +
+        '"/></div>';
+      initializecat(numberofcats);
+      numberofcats++;
+    })
+    .catch((err) => console.log("oppsie!\nan image didnt load"));
 }
 
 window.onload = function () {
-    document.getElementById("loadbutton").addEventListener("mouseenter", buttonbg);
-    document.getElementById("loadbutton").addEventListener("touchstart", buttonbg);
-    preload();
-    setLimit();
-}
+  document
+    .getElementById("loadbutton")
+    .addEventListener("mouseenter", buttonbg);
+  document
+    .getElementById("loadbutton")
+    .addEventListener("touchstart", buttonbg);
+  preload();
+  setLimit();
+};
 
 // RESPONSIVE JS
 
 window.onresize = function () {
-    setLimit();
-    reposition();
-    // customlog(maxX + ',' + maxY)
-}
+  setLimit();
+  reposition();
+  // customlog(maxX + ',' + maxY)
+};
 
 function setLimit() {
-    maxX = parseInt(document.getElementById('catbox').getBoundingClientRect().width) - 270;
-    maxY = parseInt(document.getElementById('catbox').getBoundingClientRect().height) - 250;
+  maxX =
+    parseInt(document.getElementById("catbox").getBoundingClientRect().width) -
+    270;
+  maxY =
+    parseInt(document.getElementById("catbox").getBoundingClientRect().height) -
+    250;
 }
 
 function reposition() {
-    for (tempnum = 0; tempnum < numberofcats; tempnum++) {
-        boxwidth = document.getElementById('catbox').getBoundingClientRect().width;
-        boxheight = document.getElementById('catbox').getBoundingClientRect().height;
-        currentx = document.getElementsByClassName('gattospace')[tempnum].dataset.x;
-        currenty = document.getElementsByClassName('gattospace')[tempnum].dataset.y;
-        document.getElementsByClassName('gattospace')[tempnum].style.transform = "translate("
-            + Math.min((boxwidth * currentx), maxX) + "px, "
-            + Math.min((boxheight * currenty), maxY) + "px)";
-    }
+  for (tempnum = 0; tempnum < numberofcats; tempnum++) {
+    boxwidth = document.getElementById("catbox").getBoundingClientRect().width;
+    boxheight = document
+      .getElementById("catbox")
+      .getBoundingClientRect().height;
+    currentx = document.getElementsByClassName("gattospace")[tempnum].dataset.x;
+    currenty = document.getElementsByClassName("gattospace")[tempnum].dataset.y;
+    document.getElementsByClassName("gattospace")[tempnum].style.transform =
+      "translate(" +
+      Math.min(boxwidth * currentx, maxX) +
+      "px, " +
+      Math.min(boxheight * currenty, maxY) +
+      "px)";
+  }
 }
 
 // BUTTON BACKGROUND CYCLE
@@ -104,39 +120,52 @@ function reposition() {
 var backgroundIndex = 0;
 
 function buttonbg() {
-    if (prefetchdata.length > 0) {
-        bgi = "url('" + prefetchdata[backgroundIndex % 10] + "')"
-        const mybutton = document.getElementById("loadbutton");
-        mybutton.style.backgroundImage = bgi;
-        mybutton.style.backgroundSize = "cover";
-        mybutton.style.backgroundPosition = "center";
-        backgroundIndex = (backgroundIndex + 1) % 10;
-        // customlog(bgi);
-    }
+  if (prefetchdata.length > 0) {
+    bgi = "url('" + prefetchdata[backgroundIndex % 10] + "')";
+    const mybutton = document.getElementById("loadbutton");
+    mybutton.style.backgroundImage = bgi;
+    mybutton.style.backgroundSize = "cover";
+    mybutton.style.backgroundPosition = "center";
+    backgroundIndex = (backgroundIndex + 1) % 10;
+    // customlog(bgi);
+  }
 }
 
 function initializecat() {
-    gattospace = document.getElementsByClassName("gattospace")[numberofcats];
+  gattospace = document.getElementsByClassName("gattospace")[numberofcats];
 
-    randomX = Math.random() * (maxX - minX) + minX;
-    randomY = Math.random() * (maxY - minY) + minY;
+  randomX = Math.random() * (maxX - minX) + minX;
+  randomY = Math.random() * (maxY - minY) + minY;
 
-    relativeX = randomX / document.getElementById('catbox').getBoundingClientRect().width;
-    relativeY = randomY / document.getElementById('catbox').getBoundingClientRect().height;
+  relativeX =
+    randomX / document.getElementById("catbox").getBoundingClientRect().width;
+  relativeY =
+    randomY / document.getElementById("catbox").getBoundingClientRect().height;
 
-    gattospace.style.transform = "translate(" + randomX + "px, " + randomY + "px)";
+  gattospace.style.transform =
+    "translate(" + randomX + "px, " + randomY + "px)";
 
-    gattospace.dataset.x = relativeX;
-    gattospace.dataset.y = relativeY;
+  gattospace.dataset.x = relativeX;
+  gattospace.dataset.y = relativeY;
 
-    for (index = 0; index <= numberofcats; index++) {
-        document.getElementsByClassName("gattospace")[index].addEventListener('mousedown', trackcat);
-        document.getElementsByClassName("gattospace")[index].addEventListener('mouseup', donttrackcat);
-        document.getElementsByClassName("gattospace")[index].addEventListener('mouseout', donttrackcat);
+  for (index = 0; index <= numberofcats; index++) {
+    document
+      .getElementsByClassName("gattospace")
+      [index].addEventListener("mousedown", trackcat);
+    document
+      .getElementsByClassName("gattospace")
+      [index].addEventListener("mouseup", donttrackcat);
+    document
+      .getElementsByClassName("gattospace")
+      [index].addEventListener("mouseout", donttrackcat);
 
-        document.getElementsByClassName("gattospace")[index].addEventListener('touchstart', ttrackcat);
-        document.getElementsByClassName("gattospace")[index].addEventListener('touchend', tdonttrackcat);
-    }
+    document
+      .getElementsByClassName("gattospace")
+      [index].addEventListener("touchstart", ttrackcat);
+    document
+      .getElementsByClassName("gattospace")
+      [index].addEventListener("touchend", tdonttrackcat);
+  }
 }
 
 // INTERACTION
@@ -149,100 +178,144 @@ var newX = 0;
 var newY = 0;
 
 function trackcat(e) {
-    this.style.transition = '0s';
-    trackfromX = e.clientX;
-    trackfromY = e.clientY;
-    this.style.zIndex = 3;
+  this.style.transition = "0s";
+  trackfromX = e.clientX;
+  trackfromY = e.clientY;
+  this.style.zIndex = 3;
 
-    this.addEventListener("mousemove", moveitmoveit);
+  this.addEventListener("mousemove", moveitmoveit);
 }
 
 function moveitmoveit(e) {
-    deltaX = (e.clientX) - trackfromX;
-    deltaY = (e.clientY) - trackfromY;
-    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
-    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
+  deltaX = e.clientX - trackfromX;
+  deltaY = e.clientY - trackfromY;
+  newX =
+    parseFloat(this.dataset.x) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().width
+      ) +
+    deltaX;
+  newY =
+    parseFloat(this.dataset.y) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().height
+      ) +
+    deltaY;
 
-    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+  this.style.transform = "translate(" + newX + "px, " + newY + "px)";
 }
 
 function donttrackcat(e) {
-    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
-    newX = Math.min(newX, maxX);
-    newX = Math.max(newX, minX);
+  newX =
+    parseFloat(this.dataset.x) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().width
+      ) +
+    deltaX;
+  newX = Math.min(newX, maxX);
+  newX = Math.max(newX, minX);
 
-    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
-    newY = Math.min(newY, maxY);
-    newY = Math.max(newY, minY);
+  newY =
+    parseFloat(this.dataset.y) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().height
+      ) +
+    deltaY;
+  newY = Math.min(newY, maxY);
+  newY = Math.max(newY, minY);
 
-    this.style.transition = '.2s ease-out';
-    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+  this.style.transition = ".2s ease-out";
+  this.style.transform = "translate(" + newX + "px, " + newY + "px)";
 
-    this.removeEventListener("mousemove", moveitmoveit);
+  this.removeEventListener("mousemove", moveitmoveit);
 
-    this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
-    this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
-    this.style.zIndex = 1;
+  this.dataset.x =
+    newX / document.getElementById("catbox").getBoundingClientRect().width;
+  this.dataset.y =
+    newY / document.getElementById("catbox").getBoundingClientRect().height;
+  this.style.zIndex = 1;
 
-    deltaX = 0;
-    deltaY = 0;
-    newX = 0;
-    newY = 0;
+  deltaX = 0;
+  deltaY = 0;
+  newX = 0;
+  newY = 0;
 }
 
 // MOBILE VERSION
 
 function ttrackcat(e) {
-    document.getElementById('envelope').style.overflowY = 'hidden';
-    document.body.style.overflowY = 'hidden';
-    this.style.transition = '0s';
-    trackfromX = e.touches[0].clientX;
-    trackfromY = e.touches[0].clientY;
-    this.style.zIndex = 3;
+  document.getElementById("envelope").style.overflowY = "hidden";
+  document.body.style.overflowY = "hidden";
+  this.style.transition = "0s";
+  trackfromX = e.touches[0].clientX;
+  trackfromY = e.touches[0].clientY;
+  this.style.zIndex = 3;
 
-    this.addEventListener("touchmove", tmoveitmoveit);
+  this.addEventListener("touchmove", tmoveitmoveit);
 }
 
 function tmoveitmoveit(e) {
-    deltaX = (e.touches[0].clientX) - trackfromX;
-    deltaY = (e.touches[0].clientY) - trackfromY;
-    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
-    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
+  deltaX = e.touches[0].clientX - trackfromX;
+  deltaY = e.touches[0].clientY - trackfromY;
+  newX =
+    parseFloat(this.dataset.x) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().width
+      ) +
+    deltaX;
+  newY =
+    parseFloat(this.dataset.y) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().height
+      ) +
+    deltaY;
 
-    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+  this.style.transform = "translate(" + newX + "px, " + newY + "px)";
 }
 
 function tdonttrackcat(e) {
-    document.getElementById('envelope').style.overflowY = 'visible';
-    document.body.style.overflowY = 'visible';
-    newX = (parseFloat(this.dataset.x) * parseInt(document.getElementById('catbox').getBoundingClientRect().width)) + deltaX;
-    newX = Math.min(newX, maxX);
-    newX = Math.max(newX, minX);
+  document.getElementById("envelope").style.overflowY = "visible";
+  document.body.style.overflowY = "visible";
+  newX =
+    parseFloat(this.dataset.x) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().width
+      ) +
+    deltaX;
+  newX = Math.min(newX, maxX);
+  newX = Math.max(newX, minX);
 
-    newY = (parseFloat(this.dataset.y) * parseInt(document.getElementById('catbox').getBoundingClientRect().height)) + deltaY;
-    newY = Math.min(newY, maxY);
-    newY = Math.max(newY, minY);
+  newY =
+    parseFloat(this.dataset.y) *
+      parseInt(
+        document.getElementById("catbox").getBoundingClientRect().height
+      ) +
+    deltaY;
+  newY = Math.min(newY, maxY);
+  newY = Math.max(newY, minY);
 
-    this.style.transition = '.2s ease-out';
-    this.style.transform = 'translate(' + newX + 'px, ' + newY + 'px)';
+  this.style.transition = ".2s ease-out";
+  this.style.transform = "translate(" + newX + "px, " + newY + "px)";
 
-    this.removeEventListener("touchmove", tmoveitmoveit);
-    this.dataset.x = newX / document.getElementById('catbox').getBoundingClientRect().width;
-    this.dataset.y = newY / document.getElementById('catbox').getBoundingClientRect().height;
-    this.style.zIndex = 1;
+  this.removeEventListener("touchmove", tmoveitmoveit);
+  this.dataset.x =
+    newX / document.getElementById("catbox").getBoundingClientRect().width;
+  this.dataset.y =
+    newY / document.getElementById("catbox").getBoundingClientRect().height;
+  this.style.zIndex = 1;
 
-    deltaX = 0;
-    deltaY = 0;
-    newX = 0;
-    newY = 0;
+  deltaX = 0;
+  deltaY = 0;
+  newX = 0;
+  newY = 0;
 }
 
 // MISC
 
 function limiter() {
-    getimage = function () { };
+  getimage = function () {};
 }
 
 function customlog(txt) {
-    document.getElementById('customlog').innerHTML = txt;
+  document.getElementById("customlog").innerHTML = txt;
 }
