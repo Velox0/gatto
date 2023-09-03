@@ -158,10 +158,9 @@ function initializecat() {
     document
       .getElementsByClassName("gattospace")
       [index].addEventListener("mouseout", donttrackcat);
-
     document
       .getElementsByClassName("gattospace")
-      [index].addEventListener("touchstart", ttrackcat);
+      [index].addEventListener("touchstart", trackcat);
     document
       .getElementsByClassName("gattospace")
       [index].addEventListener("touchend", tdonttrackcat);
@@ -179,11 +178,22 @@ var newY = 0;
 
 function trackcat(e) {
   this.style.transition = "0s";
-  trackfromX = e.clientX;
-  trackfromY = e.clientY;
   this.style.zIndex = 3;
 
-  this.addEventListener("mousemove", moveitmoveit);
+  if (e.type == "mousedown") {
+    console.log(e);
+    trackfromX = e.clientX;
+    trackfromY = e.clientY;
+
+    this.addEventListener("mousemove", moveitmoveit);
+  } else {
+    document.getElementById("envelope").style.overflowY = "hidden";
+    document.body.style.overflowY = "hidden";
+    trackfromX = e.touches[0].clientX;
+    trackfromY = e.touches[0].clientY;
+
+    this.addEventListener("touchmove", tmoveitmoveit);
+  }
 }
 
 function moveitmoveit(e) {
@@ -242,17 +252,6 @@ function donttrackcat(e) {
 }
 
 // MOBILE VERSION
-
-function ttrackcat(e) {
-  document.getElementById("envelope").style.overflowY = "hidden";
-  document.body.style.overflowY = "hidden";
-  this.style.transition = "0s";
-  trackfromX = e.touches[0].clientX;
-  trackfromY = e.touches[0].clientY;
-  this.style.zIndex = 3;
-
-  this.addEventListener("touchmove", tmoveitmoveit);
-}
 
 function tmoveitmoveit(e) {
   deltaX = e.touches[0].clientX - trackfromX;
