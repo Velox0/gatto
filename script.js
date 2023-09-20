@@ -154,6 +154,9 @@ function initializecat() {
       [index].addEventListener("mousedown", trackcat);
     document
       .getElementsByClassName("gattospace")
+      [index].addEventListener("mouseover", donttrackcat);
+    document
+      .getElementsByClassName("gattospace")
       [index].addEventListener("mouseup", donttrackcat);
     document
       .getElementsByClassName("gattospace")
