@@ -148,25 +148,15 @@ function initializecat() {
   gattospace.dataset.x = relativeX;
   gattospace.dataset.y = relativeY;
 
+  let thisgatto = document.getElementsByClassName("gattospace");
+
   for (index = 0; index <= numberofcats; index++) {
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("mousedown", trackcat);
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("mouseover", donttrackcat);
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("mouseup", donttrackcat);
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("mouseout", donttrackcat);
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("touchstart", trackcat);
-    document
-      .getElementsByClassName("gattospace")
-      [index].addEventListener("touchend", donttrackcat);
+    thisgatto[index].addEventListener("mousedown", trackcat);
+    thisgatto[index].addEventListener("mouseover", donttrackcat);
+    thisgatto[index].addEventListener("mouseup", donttrackcat);
+    thisgatto[index].addEventListener("mouseout", donttrackcat);
+    thisgatto[index].addEventListener("touchstart", trackcat);
+    thisgatto[index].addEventListener("touchend", donttrackcat);
   }
 }
 
