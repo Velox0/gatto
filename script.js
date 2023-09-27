@@ -160,6 +160,9 @@ function initializecat() {
       [index].addEventListener("mouseup", donttrackcat);
     document
       .getElementsByClassName("gattospace")
+      [index].addEventListener("mouseout", donttrackcat);
+    document
+      .getElementsByClassName("gattospace")
       [index].addEventListener("touchstart", trackcat);
     document
       .getElementsByClassName("gattospace")
