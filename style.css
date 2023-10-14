@@ -95,7 +95,7 @@ body {
 }
 .gatto:hover {
   transform: scale(1.1);
-  box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.432);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
   z-index: 2;
 }
 .gatto:active {
