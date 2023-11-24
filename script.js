@@ -174,7 +174,6 @@ function trackcat(e) {
   this.style.zIndex = 3;
 
   if (e.type == "mousedown") {
-    console.log(e);
     trackfromX = e.clientX;
     trackfromY = e.clientY;
 
